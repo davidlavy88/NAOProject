@@ -1,0 +1,29 @@
+topic: ~Grasping()
+language: enu
+
+proposal: %give ^rand["Give me something, please."
+                      "Put something in my hand, please."
+                      "Hand me something please"]
+                    
+proposal: %waiting ^rand["Come on, give me something please."
+                         "Don't you have something for me?"
+                         "Hey, why don't you give me something?"]
+
+proposal: %missed ^rand["Missed!" "almost!" "not quite" "try again"]
+                  
+proposal: %thanks ^rand["Thank you!" Thanks "thank you very much"
+                        "oh, what's this?" "cool, I wonder what this is"
+                        "oh, wonderful"]
+    
+proposal: %done ^rand["Okay, I don't want it anymore. Here, I'll lend it to you."
+                      "I don't want this anymore, you can borrow it for now."]
+
+proposal: %giveback ^rand["Don't forget to give it back."
+                          "On second thought, you can keep it"]
+
+proposal: %ohno "Oh No! \PAU=700\ I ^rand[lost dropped] it !"
+
+proposal: %heat "Sorry, one of my \PAU=200\ right arm \PAU=200\ joints is too hot right now."
+
+u:(e:MiddleTactilTouched $MiddleTactilTouched==1
+    $FrontTactilTouched==1 $RearTactilTouched==1) bye bye! $Grasping/Stop=1

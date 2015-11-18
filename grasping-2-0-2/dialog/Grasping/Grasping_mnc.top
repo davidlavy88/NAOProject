@@ -1,0 +1,24 @@
+topic: ~Grasping()
+language: mnc
+
+proposal: %give 拿给我一个小物件好吗
+
+proposal: %waiting ^rand["快点嘛,递给我一个小东西辣"
+                         "有给我的东西么?"
+                         "为啥不给我一个小东东呢!"]
+
+proposal: %missed 哎呀,我没抓牢!
+
+proposal: %thanks 谢谢你呦!
+
+proposal: %done 我才不稀汗拿,拿去,算我借你的
+
+proposal: %giveback 有借有环,懂了吗?
+
+proposal: %ohno 不要!就不要! \PAU=700\ 这是我的辣
+
+# CC: sincere apologies, this was translated from English via google translate...
+proposal: %heat 对不起，我的右手臂关节一个是太热了，现在
+
+u:(e:MiddleTactilTouched $MiddleTactilTouched==1
+    $FrontTactilTouched==1 $RearTactilTouched==1) 再见 $Grasping/Stop=1

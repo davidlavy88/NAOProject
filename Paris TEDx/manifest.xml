@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<package uuid="paristedx" version="0.0.2">
+ <names>
+  <name lang="en_US">Paris TEDx</name>
+  <name lang="en_US-x-scrald">Paris TEDx</name>
+ </names>
+ <descriptions>
+  <description lang="en_US">NAO presentation for Paris TEDx.</description>
+  <description lang="en_US-x-scrald">NAO presentation for Paris TEDx.</description>
+ </descriptions>
+ <supportedLanguages>
+  <language>en_US</language>
+ </supportedLanguages>
+ <descriptionLanguages>
+  <language>en_US</language>
+ </descriptionLanguages>
+ <contents>
+  <behaviorContent path="behavior_1">
+   <userRequestable/>
+   <nature>interactive</nature>
+   <names>
+    <name lang="en_US">Presentation</name>
+    <name lang="en_US-x-scrald">Presentation</name>
+   </names>
+   <triggerSentences>
+    <sentence lang="en_US">ted</sentence>
+    <sentence lang="en_US">ted ex</sentence>
+    <sentence lang="en_US">blow my mind</sentence>
+    <sentence lang="en_US">open your mind</sentence>
+    <sentence lang="en_US">tedex</sentence>
+    <sentence lang="en_US-x-scrald">ted</sentence>
+    <sentence lang="en_US-x-scrald">ted ex</sentence>
+    <sentence lang="en_US-x-scrald">blow my mind</sentence>
+    <sentence lang="en_US-x-scrald">open your mind</sentence>
+    <sentence lang="en_US-x-scrald">tedex</sentence>
+   </triggerSentences>
+   <loadingResponses>
+    <sentence lang="en_US">Let's share ideas</sentence>
+    <sentence lang="en_US">I have an idea worth sharing</sentence>
+    <sentence lang="en_US">Let me open your mind</sentence>
+    <sentence lang="en_US-x-scrald">Let's share ideas</sentence>
+    <sentence lang="en_US-x-scrald">I have an idea worth sharing</sentence>
+    <sentence lang="en_US-x-scrald">Let me open your mind</sentence>
+   </loadingResponses>
+   <autonomous/>
+   <permissions/>
+  </behaviorContent>
+ </contents>
+ <requirements>
+  <naoqiRequirement minVersion="2.1" maxVersion="2.4"/>
+  <robotRequirement maxHeadVersion="5.0" minBodyVersion="3.3" maxBodyVersion="5.0" model="NAO_H25" minHeadVersion="4.0"/>
+ </requirements>
+</package>

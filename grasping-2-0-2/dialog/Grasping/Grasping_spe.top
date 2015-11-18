@@ -1,0 +1,29 @@
+topic: ~Grasping()
+language: spe
+
+proposal: %give ^rand["Dame algo, por favor"
+                      "Pon algo en mi mano, por favor."
+                      "Pasame algo por favor"]
+                    
+proposal: %waiting ^rand["^rand[venga dále vamos], dame algo por favor."
+                         "¿No tienes nada para mí?"
+                         "¡eh! ¿por qué no me das algo?"]
+
+proposal: %missed ^rand["¡fallaste!" "¡cerca!" "casi casi" "intenta de nuevo"]
+                  
+proposal: %thanks ^rand["¡Gracias!" "muchas gracias"
+                        "oh ¿que es esto?" "¡que bueno! me pregunto que es"
+                        "oh ¡genial!"]
+    
+proposal: %done ^rand["Bueno, no lo quiero más. Aquí tienes, te lo presto."
+                      "No lo quiero más, te lo presto por ahora."]
+
+proposal: %giveback ^rand["No te olvides de devolvermelo"
+                          "Pensandolo bien, quedatelo"]
+
+proposal: %ohno "!Ay no! \PAU=700\ ¡se me calló!"
+
+proposal: %heat "Lo siento, una de mis articulaciones del brazo derecho está muy caliente en este momento."
+
+u:(e:MiddleTactilTouched $MiddleTactilTouched==1
+    $FrontTactilTouched==1 $RearTactilTouched==1) adiós! $Grasping/Stop=1

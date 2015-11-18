@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<package version="2.0.2" uuid="grasping">
+  <names>
+    <name lang="en_US">Grasping</name>
+    <name lang="es_ES">Manipulación de objetos</name>
+    <name lang="fr_FR">Manipulation d'objets</name>
+    <name lang="zh_CN">抓住这个项目</name>
+  </names>
+  <descriptions>
+    <description lang="en_US">Nao demonstrates his ability to grasp small objects.
+
+Nao will ask you to put an object in his hand. Then he will detect if there is something in his grasp and ask you to try again if not. After 65 seconds or 3 missed attempts the robot will end the behavior. If he drops the object at any point he will start over. Nao will inspect the object before giving it back. If nobody takes the object back after 15 seconds Nao will drop it and quit the behavior.</description>
+    <description lang="es_ES">Nao demuestra su capacidad de agarrar objetos pequeños.
+
+Nao le pedirá que le coloque un objeto en la mano, y comprobará que lo haya tomado bien. Si falla, le pedirá que vuelva a intentarlo. Después de 65 segundos, el robot abandona la acción. Si se le cae el objeto en cualquier momento, empezará de nuevo. Si el objeto no se cae, Nao lo inspeccionará y lo devolverá. Si nadie retoma el objeto después de 15 segundos, lo dejará caer.</description>
+    <description lang="fr_FR">Nao démontre sa capacité à saisir de petits objets.
+
+Nao vous demandera de mettre un objet dans sa main, puis vérifiera s'il a pu bien le prendre. Le cas échéant, il vous demandera d'essayer de nouveau. Après 65 secondes, le robot abandonnera l'action. S'il laisse tomber l'objet à tout moment, il recommencera à zéro. Si l'objet ne tombe pas, Nao va l'inspecter et le redonner par la suite. Si personne ne reprends l'objet après 15 secondes, il le laissera tomber.</description>
+    <description lang="zh_CN">抓住这个项目</description>
+  </descriptions>
+  <supportedLanguages>
+    <language>en_US</language>
+    <language>fr_FR</language>
+    <language>zh_CN</language>
+    <language>es_ES</language>
+  </supportedLanguages>
+  <descriptionLanguages>
+    <language>en_US</language>
+    <language>fr_FR</language>
+    <language>zh_CN</language>
+    <language>es_ES</language>
+  </descriptionLanguages>
+  <contents>
+    <behaviorContent path=".">
+      <nature>interactive</nature>
+      <names>
+        <name lang="en_US">Grasping</name>
+        <name lang="es_ES">Manipulación de objetos</name>
+        <name lang="fr_FR">Manipulation d'objets</name>
+        <name lang="zh_CN">抓住这个项目</name>
+      </names>
+      <triggerSentences>
+        <sentence lang="en_US">Grasping</sentence>
+        <sentence lang="en_US">Grasp demo</sentence>
+        <sentence lang="es_ES">Agarra esto</sentence>
+        <sentence lang="es_ES">Manipulación de objetos</sentence>
+        <sentence lang="es_ES">Manipulación de objeto</sentence>
+        <sentence lang="es_ES">Manipula este objeto</sentence>
+        <sentence lang="es_ES">Toma esto</sentence>
+        <sentence lang="fr_FR">Attrape ça</sentence>
+        <sentence lang="fr_FR">Prends un objet</sentence>
+        <sentence lang="fr_FR">Manipulation dobjets</sentence>
+        <sentence lang="fr_FR">Manipulation dobjet</sentence>
+        <sentence lang="zh_CN">抓住这个项目</sentence>
+      </triggerSentences>
+      <permissions/>
+    </behaviorContent>
+    <behaviorContent path="animations/ExtendHand">
+      <nature></nature>
+      <permissions/>
+    </behaviorContent>
+    <behaviorContent path="animations/Missed">
+      <nature></nature>
+      <permissions/>
+    </behaviorContent>
+    <behaviorContent path="animations/ThankYou">
+      <nature></nature>
+      <permissions/>
+    </behaviorContent>
+    <behaviorContent path="animations/ObserveObject1">
+      <nature></nature>
+      <permissions/>
+    </behaviorContent>
+    <behaviorContent path="animations/ObserveObject2">
+      <nature></nature>
+      <permissions/>
+    </behaviorContent>
+    <behaviorContent path="animations/ObserveObject3">
+      <nature></nature>
+      <permissions/>
+    </behaviorContent>
+    <behaviorContent path="animations/OpenHand">
+      <nature></nature>
+      <permissions/>
+    </behaviorContent>
+    <behaviorContent path="animations/ReturnObject">
+      <nature></nature>
+      <permissions/>
+    </behaviorContent>
+    <behaviorContent path="animations/LostIt">
+      <nature></nature>
+      <permissions/>
+    </behaviorContent>
+    <behaviorContent path="animations/DontForget">
+      <nature></nature>
+      <permissions/>
+    </behaviorContent>
+  </contents>
+  <requirements>
+    <naoqiRequirement minVersion="2.1"/>
+    <robotRequirement model="NAO_H25"/>
+  </requirements>
+</package>

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheProject xmlns="http://www.aldebaran-robotics.com/schema/choregraphe/project.xsd" xar_version="3">
+    <Box name="root" id="-1" localization="8" tooltip="Root box of Choregraphe&apos;s behavior. Highest level possible." x="0" y="0">
+        <bitmap>media/images/box/root.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+        <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+        <Input name="RightBumperPressed" type="0" type_size="1" nature="4" stm_value_name="RightBumperPressed" inner="1" tooltip="RightBumperPressed desc" id="4" />
+        <Input name="LeftBumperPressed" type="0" type_size="1" nature="4" stm_value_name="LeftBumperPressed" inner="1" tooltip="LeftBumperPressed desc" id="5" />
+        <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="6" />
+        <Timeline enable="0">
+            <BehaviorLayer name="behavior_layer1">
+                <BehaviorKeyframe name="keyframe1" index="1">
+                    <Diagram>
+                        <Box name="Presentation" id="1" localization="8" tooltip="" x="111" y="22">
+                            <bitmap>media/images/box/box-python-script.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[
+import qi
+import threading
+import time
+class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+
+    def onLoad(self):
+        self.ses = self.session()
+        self.anim_speech = self.ses.service('ALAnimatedSpeech')
+        self.tts = self.ses.service('ALTextToSpeech')
+        self.posture = self.ses.service("ALRobotPosture")
+        self.aware = self.ses.service("ALBasicAwareness")
+        self.lock = threading.Lock()
+        self.error_msg = "Oh my! I screwed up. Sorry."
+        self.content = ["""Ooh! that tickles. \PAU=700\ My turn finally!""",
+                        """ Hello, I'm NAO. \PAU=500\ I'm a humanoid robot, imagined and manufactured by Aldebaran Robotics, here, in Paris. \PAU=1000\ One of my favorite activities is to assist teachers in special education classrooms. \PAU=1000\ You see, \PAU=100\ the kids we work with \PAU=100\ are extraordinary \PAU=500\ and often have a beautiful hidden talent. \PAU=1000\ What I like the most, \PAU=500\ is when we discover it together. \PAU=1000\ Most children with autism are attracted to technology \PAU=500\ and are curious to work with me. \PAU=1000\ We play interactive games to learn about turn taking, work on our memory, \PAU=500\ label objects, \PAU=500\ exercise and dance \PAU=100\ ^run(boston_animation_library/Stand/robotic_dance). We can even count numbers or spell words. \PAU=700\ For example, \PAU=500\ T \PAU=100\ E \PAU=100\ D \PAU=100\ X \PAU=1000\ ted-x ^run(boston_animation_library/Stand/little_laugh). \PAU=1000\ As a robot, I can be quite patient, \PAU=400\ and do the same task over and over again, for as many times as a child needs, \PAU=700\ without ever getting frustrated. \PAU=1000\ This brings comfort to the kids, \PAU=500\ keeping them engaged when exploring new topics. \PAU=800\ We have so much fun learning together. \PAU=1500\ Isn't it the best to have a robot sidekick growing up? ^run(animations/Stand/Emotions/Positive/Laugh_2) \PAU=10\ Am I right?""",
+                        """\PAU=4000\ Hey Alex, \PAU=1000\ this is when you show the video of me working with the children. """]
+
+    def onUnload(self):
+        pass
+
+    def onInput_onStart(self):
+        self.aware.setEngagementMode('Unengaged')
+        result = self.posture.goToPosture('Sit', 1)
+        if not result:
+            self.onStopped()
+
+    def onInput_onDapDone(self):
+        self.anim_speech.say(self.content[2])
+        time.sleep(5)
+        self.posture.goToPosture('Sit', 1)
+
+    def onInput_onBumpers(self):
+        if self.lock.acquire(False):
+            qi.async(self.say_intro)
+            result = self.posture.goToPosture('Stand', 1)
+            if result:
+                self.anim_speech.say(self.content[1])
+                self.onDap()
+            else:
+                self.tts.say(self.error_msg)
+
+    def say_intro(self):
+        self.aware.setEngagementMode('SemiEngaged')
+        self.tts.say(self.content[0])
+
+
+    def onInput_onStop(self):
+        self.onUnload() #it is recommended to reuse the clean-up as the box is stopped
+        self.onStopped() #activate the output of the box]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+                            <Input name="onDapDone" type="1" type_size="1" nature="1" inner="0" tooltip="" id="4" />
+                            <Input name="onBumpers" type="1" type_size="1" nature="1" inner="0" tooltip="" id="5" />
+                            <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="6" />
+                            <Output name="onDap" type="1" type_size="1" nature="2" inner="0" tooltip="" id="7" />
+                        </Box>
+                        <Box name="Perform Prop" id="2" localization="8" tooltip="Initiate props proactively" x="116" y="139">
+                            <bitmap>media/images/box/box-python-script.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[import time
+
+class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+
+    def onLoad(self):
+        self.s =  self.session()
+        self.memory = self.s.service('ALMemory')
+        self.tts = self.s.service('ALTextToSpeech')
+        self.daps = self.s.service('Daps')
+        self.be_man = self.s.service('ALBehaviorManager')
+
+        ## Memory subscriptions
+
+        self.subscriptions = {'Daps/InProgress':'stop_behavior',
+                              'Daps/Warning':'perfom_warning',
+                              'Daps/Success':'perfom_success',
+                              'Daps/Failure':'perfom_failure'}
+
+        self.subscribe_events()
+
+
+    def onUnload(self):
+
+        for subs in self.subscriptions.keys():
+            try:
+                self.memory.unsubscribeToEvent(subs, self.getName())
+            except RuntimeError as e:
+                self.logger.debug('Error unsubscribing form ALMemory event: %s' % e)
+
+    def onInput_onStart(self):
+
+        self.tts.say(self.getParameter('Initial message'))
+        self.daps.dap(self.getParameter('Dap type'),
+                  self.getParameter('Warning timeout'),
+                  self.getParameter('Failure timeout'))
+
+    def stop_behavior(self, key, value, message):
+        if value == 0:
+            self.onInput_onStop()
+
+    def perfom_warning(self, key, value, message):
+        self.tts.say(self.getParameter('Warning message'))
+
+    def perfom_failure(self, key, value, message):
+        self.tts.say(self.getParameter('Failure message'))
+
+    def perfom_success(self, key, value, message):
+        if self.getParameter('Play sound'):
+            self.be_man.runBehavior('daps/animations/boom_sound')
+        self.tts.say(self.getParameter('Success message'))
+
+
+    def subscribe_events(self):
+        for subs in self.subscriptions.iteritems():
+            self.memory.subscribeToEvent(subs[0], self.getName(), subs[1])
+
+    def onInput_onStop(self):
+        self.onUnload() #it is recommended to reuse the clean-up as the box is stopped
+        self.onStopped() #activate the output of the box]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+                            <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
+                            <Parameter name="Dap type" inherits_from_parent="0" content_type="3" value="rfistbump" default_value="llowfive" custom_choice="0" tooltip="" id="5">
+                                <Choice value="rhandshake" />
+                                <Choice value="lhandshake" />
+                                <Choice value="rfistbump" />
+                                <Choice value="lfistbump" />
+                                <Choice value="rhighfive" />
+                                <Choice value="lhighfive" />
+                                <Choice value="rlowfive" />
+                                <Choice value="llowfive" />
+                            </Parameter>
+                            <Parameter name="Warning message" inherits_from_parent="0" content_type="3" value="Don&apos;t leave me hanging" default_value="Don&apos;t leave me hanging" custom_choice="0" tooltip="" id="6" />
+                            <Parameter name="Failure message" inherits_from_parent="0" content_type="3" value="I see how it is" default_value="I see how it is" custom_choice="0" tooltip="" id="7" />
+                            <Parameter name="Play sound" inherits_from_parent="0" content_type="0" value="1" default_value="0" tooltip="" id="8" />
+                            <Parameter name="Initial message" inherits_from_parent="0" content_type="3" value="Bump it sis" default_value="Hello" custom_choice="0" tooltip="" id="9" />
+                            <Parameter name="Success message" inherits_from_parent="0" content_type="3" value="Nicely done" default_value="Awesome" custom_choice="0" tooltip="" id="10" />
+                            <Parameter name="Warning timeout" inherits_from_parent="0" content_type="1" value="8" default_value="10" min="0" max="60" tooltip="Dissabled if 0" id="11" />
+                            <Parameter name="Failure timeout" inherits_from_parent="0" content_type="1" value="25" default_value="30" min="0" max="100" tooltip="disabled if 0" id="12" />
+                        </Box>
+                        <Link inputowner="2" indexofinput="2" outputowner="1" indexofoutput="7" />
+                        <Link inputowner="1" indexofinput="4" outputowner="2" indexofoutput="4" />
+                        <Link inputowner="1" indexofinput="2" outputowner="0" indexofoutput="2" />
+                        <Link inputowner="1" indexofinput="5" outputowner="0" indexofoutput="4" />
+                        <Link inputowner="1" indexofinput="5" outputowner="0" indexofoutput="5" />
+                        <Link inputowner="0" indexofinput="6" outputowner="1" indexofoutput="6" />
+                    </Diagram>
+                </BehaviorKeyframe>
+            </BehaviorLayer>
+        </Timeline>
+    </Box>
+</ChoregrapheProject>

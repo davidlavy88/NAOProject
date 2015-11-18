@@ -1,0 +1,23 @@
+topic: ~Grasping()
+language: frf
+
+proposal: %give Donne moi quelque chose, s'il te plait!
+
+proposal: %waiting ^rand["Allez, donne moi quelque chose s'il te plait."
+                         "Tu n'as pas quelque chose pour moi?"
+                         "hé, tu me donnerais quelque chose?"]
+
+proposal: %missed Raté!
+
+proposal: %thanks Merci!
+
+proposal: %done Je n'en veux plus finalement. Tiens, je te le prête.
+
+proposal: %giveback ça s'appelle revient!
+
+proposal: %ohno Oh non! \PAU=700\ Je l'ai perdu.
+
+proposal: %heat "Désolé, un de mes articulations de bras droit est trop chaude en ce moment"
+
+u:(e:MiddleTactilTouched $MiddleTactilTouched==1
+    $FrontTactilTouched==1 $RearTactilTouched==1) au revoir! $Grasping/Stop=1
